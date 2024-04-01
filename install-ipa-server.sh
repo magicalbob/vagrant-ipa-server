@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+# Read configuration from config.json
+export IPA_SERVER_PASSWORD=$(jq -r '.server_password' config.json)
+export IPA_HOSTNAME=$(jq -r '.hostname' config.json)
+export IPA_REALM=$(jq -r '.realm' config.json)
+export IPA_IP=$(jq -r '.ip' config.json)
+
 # Make sure required env variables are defined
 if [ -z "$IPA_SERVER_PASSWORD" ]
 then
