@@ -1,3 +1,4 @@
 .vagrant
 Vagrantfile
 ipa.server.log
+run-ipa-server.sh
