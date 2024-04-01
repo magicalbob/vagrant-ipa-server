@@ -32,7 +32,7 @@ Vagrant.configure("2") do |config|
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
-  config.vm.network "private_network", ip: "192.168.56.201"
+  config.vm.network "private_network", ip: "${IPA_IP}"
 
   # Create a public network, which generally matched to bridged network.
   # Bridged networks make the machine appear as another physical device on
@@ -61,7 +61,7 @@ Vagrant.configure("2") do |config|
   # Ansible, Chef, Docker, Puppet and Salt are also available. Please see the
   # documentation for more information about their specific syntax and use.
    config.vm.provision "shell", inline: <<-SHELL
-     sudo echo 192.168.56.201   ipa-server.ellisbs.co.uk >> /etc/hosts
+     sudo echo ${IPA_IP}   ${IPA_HOSTNAME} >> /etc/hosts
      sudo mkdir -p /etc/httpd/conf
      sudo cat <<EOF > /etc/httpd/conf/httpd.conf
 ServerRoot "/etc/httpd"
@@ -145,7 +145,7 @@ IncludeOptional conf.d/*.conf
 EOF
      sudo dnf update -y
      sudo dnf install -y ipa-server
-     sudo ipa-server-install -p 'rbT9jk7q2h!' -a 'rbT9jk7q2h!' --hostname ipa-server.ellisbs.co.uk -r ELLISBS.CO.UK -U
-     echo -n 'rbT9jk7q2h!' | sudo kinit admin
+     sudo ipa-server-install -p '${IPA_SERVER_PASSWORD}' -a '${IPA_SERVER_PASSWORD}' --hostname '${IPA_HOSTNAME}' -r '${IPA_REALM}' -U
+     echo -n '${IPA_SERVER_PASSWORD}' | sudo kinit admin
    SHELL
 end
