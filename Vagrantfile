@@ -155,5 +155,6 @@ IncludeOptional conf.d/*.conf
 EOF
      sudo dnf update -y
      sudo dnf install -y ipa-server
+     sudo ipa-server-install -p 'rbT9jk7q2h!' -a 'rbT9jk7q2h!' --hostname ipa-server.ellisbs.co.uk -r ELLISBS.CO.UK -U
    SHELL
 end
